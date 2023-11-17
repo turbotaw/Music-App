@@ -19,7 +19,6 @@ class SpotifyAuthorizationControllerTests {
 
     @BeforeEach
     void setUp() {
-        // Initialize mocks and inject them into the controller
         spotifySecretsConfig = mock(SpotifySecretsConfig.class);
         controller = new SpotifyAuthorizationController(spotifySecretsConfig);
     }
@@ -42,7 +41,7 @@ class SpotifyAuthorizationControllerTests {
         assertTrue(url.contains("client_id=" + clientId));
         assertTrue(url.contains("redirect_uri=" + redirectUri));
         assertTrue(url.contains("code_challenge_method=S256"));
-        assertTrue(url.contains("code_challenge=")); // This indirectly tests generateCodeChallenge
+        assertTrue(url.contains("code_challenge=")); 
     }
 
     @Test
@@ -50,8 +49,5 @@ class SpotifyAuthorizationControllerTests {
         String code = "test-code";
         String redirectUrl = controller.spotifyCallback(code);
         assertEquals("redirect:/", redirectUrl);
-        // Further assertions can be made based on how you implement the token exchange logic
     }
-
-    // Removed direct tests for private methods
 }
