@@ -1,4 +1,4 @@
-package com.music.musicapp.music_objects.interfaces;
+package com.music.musicapp.util.interfaces;
 
 import java.util.List;
 

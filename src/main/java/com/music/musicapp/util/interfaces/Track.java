@@ -1,4 +1,4 @@
-package com.music.musicapp.music_objects.interfaces;
+package com.music.musicapp.util.interfaces;
 
 public interface Track {
     String getTrackName();

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import com.music.musicapp.util.auth.SpotifySecretsConfig;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest

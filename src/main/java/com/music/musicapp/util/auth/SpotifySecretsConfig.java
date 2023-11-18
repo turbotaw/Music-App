@@ -1,4 +1,4 @@
-package com.music.musicapp;
+package com.music.musicapp.util.auth;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

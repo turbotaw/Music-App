@@ -1,10 +1,11 @@
-package com.music.musicapp;
+package com.music.musicapp.util.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.security.MessageDigest;
@@ -20,12 +21,12 @@ public class SpotifyAuthorizationController {
         this.spotifySecretsConfig = spotifySecretsConfig;
     }
 
+
     @GetMapping("/login/spotify")
     public RedirectView spotifyLogin() {
         String clientId = spotifySecretsConfig.getClientId();
         String redirectUri = spotifySecretsConfig.getRedirectUri();
 
-        // Generate the code verifier and code challenge
         codeVerifier = generateCodeVerifier();
         String codeChallenge = generateCodeChallenge(codeVerifier);
 
@@ -42,8 +43,7 @@ public class SpotifyAuthorizationController {
 
     @GetMapping("/callback")
     public String spotifyCallback(@RequestParam("code") String code) {
-      //TODO: add logic to store bearer token
-
+        //TODO: need to properly store the auth token
         return "redirect:/";
     }
 

@@ -1,11 +1,11 @@
-package com.music.musicapp.music_objects.implementing_classes;
+package com.music.musicapp.util.implementing_classes;
 
 import java.sql.Date;
 import java.util.List;
 
-import com.music.musicapp.music_objects.interfaces.Album;
-import com.music.musicapp.music_objects.interfaces.Artist;
-import com.music.musicapp.music_objects.interfaces.Track;
+import com.music.musicapp.util.interfaces.Album;
+import com.music.musicapp.util.interfaces.Artist;
+import com.music.musicapp.util.interfaces.Track;
 
 
 public class SpotifyAlbum implements Album {
@@ -40,7 +40,7 @@ public class SpotifyAlbum implements Album {
         this.releaseDatePrecision = releaseDatePrecision;
         this.restrictions = restrictions;
     }
-    
+
     public String getName() {
         return name;
     }

@@ -1,13 +1,16 @@
 package com.music.musicapp.music_objects.implementing_classes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.music.musicapp.music_objects.interfaces.Album;
-import com.music.musicapp.music_objects.interfaces.Artist;
+import com.music.musicapp.util.implementing_classes.SpotifyTrack;
+import com.music.musicapp.util.interfaces.Album;
+import com.music.musicapp.util.interfaces.Artist;
 
 public class SpotifyTrackTests {
 
@@ -82,5 +85,53 @@ public class SpotifyTrackTests {
     @Test
     public void testIsLocal() {
         assertEquals(false, spotifyTrack.isLocal());
+    }
+
+     @Test
+    public void testSetTrackName() {
+        spotifyTrack.setTrackName("New Track Name");
+        assertEquals("New Track Name", spotifyTrack.getTrackName());
+    }
+
+    @Test
+    public void testSetDurationMs() {
+        spotifyTrack.setDurationMs(200000); // 3 minutes and 20 seconds
+        assertEquals(200000, spotifyTrack.getDurationMs());
+    }
+
+    @Test
+    public void testSetIsrcId() {
+        spotifyTrack.setIsrcId("new-isrc-456");
+        assertEquals("new-isrc-456", spotifyTrack.getIsrcId());
+    }
+
+    @Test
+    public void testSetUri() {
+        spotifyTrack.setUri("https://example.com/new-uri");
+        assertEquals("https://example.com/new-uri", spotifyTrack.getUri());
+    }
+
+    @Test
+    public void testSetPlayable() {
+        spotifyTrack.setPlayable(false);
+        assertFalse(spotifyTrack.isPlayable());
+    }
+
+    @Test
+    public void testSetPreviewUrl() {
+        spotifyTrack.setPreviewUrl("https://example.com/new-preview");
+        assertEquals("https://example.com/new-preview", spotifyTrack.getPreviewUrl());
+    }
+
+    @Test
+    public void testSetTrackNumber() {
+        spotifyTrack.setTrackNumber(5);
+        assertEquals(5, spotifyTrack.getTrackNumber());
+    }
+
+    @Test
+    public void testSetLocal() {
+        spotifyTrack.setLocal(true);
+        assertTrue(spotifyTrack.isLocal());
     }
 }

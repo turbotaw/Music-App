@@ -10,8 +10,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.music.musicapp.music_objects.interfaces.Artist;
-import com.music.musicapp.music_objects.interfaces.Track;
+import com.music.musicapp.util.implementing_classes.SpotifyAlbum;
+import com.music.musicapp.util.implementing_classes.SpotifyRestrictions;
+import com.music.musicapp.util.interfaces.Artist;
+import com.music.musicapp.util.interfaces.Track;
 
 public class SpotifyAlbumTests {
 
@@ -19,7 +21,7 @@ public class SpotifyAlbumTests {
 
     @BeforeEach
     public void setUp() {
-        
+
         Artist artist1 = mock(Artist.class);
         Artist artist2 = mock(Artist.class);
 

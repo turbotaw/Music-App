@@ -1,9 +1,7 @@
-package com.music.musicapp.music_objects.interfaces;
+package com.music.musicapp.util.interfaces;
 
 import java.util.Date;
 import java.util.List;
-// import com.music.musicapp.music_objects.interfaces.Artist;
-// import com.music.musicapp.music_objects.interfaces.Track;
 
 public interface Album {
     String getName();

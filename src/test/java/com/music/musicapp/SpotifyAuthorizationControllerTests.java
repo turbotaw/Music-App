@@ -9,6 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.music.musicapp.util.auth.SpotifyAuthorizationController;
+import com.music.musicapp.util.auth.SpotifySecretsConfig;
+
 class SpotifyAuthorizationControllerTests {
 
     @Mock

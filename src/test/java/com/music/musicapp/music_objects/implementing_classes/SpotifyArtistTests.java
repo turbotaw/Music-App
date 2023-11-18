@@ -9,7 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.music.musicapp.music_objects.interfaces.Album;
+import com.music.musicapp.util.implementing_classes.SpotifyArtist;
+import com.music.musicapp.util.interfaces.Album;
 
 public class SpotifyArtistTests {
 

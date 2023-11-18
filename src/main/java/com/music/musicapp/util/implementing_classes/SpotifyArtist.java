@@ -1,9 +1,9 @@
-package com.music.musicapp.music_objects.implementing_classes;
+package com.music.musicapp.util.implementing_classes;
 
 import java.util.List;
 
-import com.music.musicapp.music_objects.interfaces.Album;
-import com.music.musicapp.music_objects.interfaces.Artist;
+import com.music.musicapp.util.interfaces.Album;
+import com.music.musicapp.util.interfaces.Artist;
 
 public class SpotifyArtist implements Artist {
     private String name;
@@ -23,7 +23,7 @@ public class SpotifyArtist implements Artist {
         this.type = type;
         this.uri = uri;
     }
-    
+
     @Override
     public String getName() {
         return name;

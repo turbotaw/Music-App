@@ -1,4 +1,4 @@
-package com.music.musicapp.music_objects.implementing_classes;
+package com.music.musicapp.util.implementing_classes;
 
 public class SpotifyImage {
     private String url;
@@ -10,7 +10,7 @@ public class SpotifyImage {
         this.height = height;
         this.width = width;
     }
-    
+
     public String getUrl() {
         return url;
     }

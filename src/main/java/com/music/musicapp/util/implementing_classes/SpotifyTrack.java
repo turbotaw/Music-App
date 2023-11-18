@@ -1,8 +1,8 @@
-package com.music.musicapp.music_objects.implementing_classes;
+package com.music.musicapp.util.implementing_classes;
 
-import com.music.musicapp.music_objects.interfaces.Album;
-import com.music.musicapp.music_objects.interfaces.Artist;
-import com.music.musicapp.music_objects.interfaces.Track;
+import com.music.musicapp.util.interfaces.Album;
+import com.music.musicapp.util.interfaces.Artist;
+import com.music.musicapp.util.interfaces.Track;
 
 public class SpotifyTrack implements Track {
     private String trackName;
@@ -29,7 +29,7 @@ public class SpotifyTrack implements Track {
         this.trackNumber = trackNumber;
         this.isLocal = isLocal;
     }
-    
+
     @Override
     public String getTrackName() {
         return trackName;
