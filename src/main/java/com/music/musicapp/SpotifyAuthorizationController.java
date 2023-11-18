@@ -42,10 +42,7 @@ public class SpotifyAuthorizationController {
 
     @GetMapping("/callback")
     public String spotifyCallback(@RequestParam("code") String code) {
-        // Exchange the code for an access token
-        // Include the code verifier in the request
-        // ...
-        System.out.println("Code is: " + code);
+      //TODO: add logic to store bearer token
 
         return "redirect:/";
     }
