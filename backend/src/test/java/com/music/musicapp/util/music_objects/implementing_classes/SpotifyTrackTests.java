@@ -1,4 +1,4 @@
-package com.music.musicapp.music_objects.implementing_classes;
+package com.music.musicapp.util.music_objects.implementing_classes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
