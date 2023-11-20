@@ -3,11 +3,15 @@ package com.music.musicapp.util.auth;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.util.Optional;
+
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.music.musicapp.util.data_access.SpotifyTokenService;
 
 @SpringBootTest
 public class SpotifyTokenControllerTests {
@@ -18,27 +22,27 @@ public class SpotifyTokenControllerTests {
     @MockBean
     private SpotifyTokenService spotifyTokenService;
 
-    @BeforeEach
-    void setUp() {
-        // Configure behavior of the mock here if needed
-    }
-
     @Test
     void testGetAuthorizationToken() {
-        when(spotifyTokenService.getAuthorizationToken()).thenReturn("test");
-        String result = spotifyTokenController.getAuthorizationToken();
+        Long userId = 123L;
+        String expectedToken = "test";
+        when(spotifyTokenService.getAuthorizationToken(userId)).thenReturn(Optional.of(expectedToken));
+        Map<String, Object> result = spotifyTokenController.getAuthorizationToken(userId);
 
-        assertEquals("test", result);
-        verify(spotifyTokenService).setAccessToken("test");
-        verify(spotifyTokenService).setAuthorizationToken("test");
+        assertEquals(userId, result.get("user_id"));
+        assertEquals(expectedToken, result.get("auth_token"));
+        verify(spotifyTokenService).getAuthorizationToken(userId);
     }
 
     @Test
     void testGetAccessToken() {
-        String auth_token = "test_token";
-        when(spotifyTokenService.getAccessToken(auth_token)).thenReturn("access_token");
-        String result = spotifyTokenController.getAccessToken(auth_token);
+        Long userId = 123L;
+        String expectedAccessToken = "test_token";
+        when(spotifyTokenService.getAccessToken(userId)).thenReturn(Optional.of(expectedAccessToken));
+        Map<String, Object> result = spotifyTokenController.getAccessToken(userId);
 
-        assertEquals("access_token", result);
+        assertEquals(userId, result.get("user_id"));
+        assertEquals(expectedAccessToken, result.get("access_token"));
+        verify(spotifyTokenService).getAccessToken(userId);
     }
 }

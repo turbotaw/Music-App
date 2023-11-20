@@ -4,13 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
 @Entity
-@Table(name = "token", schema = "public")
-public class Token {
+@Table(name = "spotifytokentable", schema = "public")
+public class SpotifyTokenTable {
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -24,10 +21,6 @@ public class Token {
 
     @Column(name = "refresh_token", length = 255)
     private String refreshToken;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user_id"), referencedColumnName = "user_id", insertable = false, updatable = false)
-    private AppUser appUser;
 
     public Long getUserId() {
         return userId;
@@ -61,11 +54,11 @@ public class Token {
         this.refreshToken = refreshToken;
     }
 
-    public AppUser getAppUser() {
-        return appUser;
-    }
+    // public AppUser getAppUser() {
+    //     return appUser;
+    // }
 
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
+    // public void setAppUser(AppUser appUser) {
+    //     this.appUser = appUser;
+    // }
 }
