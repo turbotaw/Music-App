@@ -1,6 +1,5 @@
 package com.music.musicapp.util.data_access;
 
-import com.music.musicapp.util.data_access.AppUser;
 import com.music.musicapp.util.data_access.AppUser.DeviceType;
 import com.music.musicapp.util.data_access.AppUser.UserStatus;
 import org.junit.jupiter.api.BeforeEach;

@@ -22,7 +22,6 @@ public class CodeGeneratorTests {
         String challenge = CodeGenerator.generateCodeChallenge(verifier);
 
         assertNotNull(challenge);
-        // Optionally, assert the length or pattern of the challenge, similar to
         // verifier
     }
 
