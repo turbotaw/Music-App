@@ -1,12 +1,22 @@
 package com.music.musicapp.util.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.music.musicapp.util.data_access.SpotifyTokenService;
+import com.music.musicapp.util.implementing_classes.SpotifyTokenResponse;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SpotifyAuthorizationController {
@@ -27,11 +37,12 @@ public class SpotifyAuthorizationController {
     }
 
     @GetMapping("/login/spotify")
-    public RedirectView spotifyLogin() {
+    public RedirectView spotifyLogin(HttpSession session) {
         String clientId = spotifySecretsConfig.getClientId();
         String redirectUri = spotifySecretsConfig.getRedirectUri();
 
         codeVerifier = CodeGenerator.generateCodeVerifier();
+        session.setAttribute("codeVerifier", codeVerifier);
         String codeChallenge = CodeGenerator.generateCodeChallenge(codeVerifier);
 
         String authorizationUri = "https://accounts.spotify.com/authorize" +
@@ -46,8 +57,12 @@ public class SpotifyAuthorizationController {
     }
 
     @GetMapping("/callback")
-    public String spotifyCallback(@RequestParam("code") String code, @RequestParam("user_id") Long user_id) {
+    public String spotifyCallback(@RequestParam("code") String code, @RequestParam("user_id") Long user_id, HttpSession session) {
+        String codeVerifier = (String) session.getAttribute("codeVerifier");
+        SpotifyTokenResponse accessToken = spotifyTokenService.exchangeCodeForToken(code, codeVerifier);
         spotifyTokenService.setAuthorizationToken(user_id, code);
         return "redirect:/";
     }
+
+    
 }

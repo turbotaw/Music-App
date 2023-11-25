@@ -1,4 +1,4 @@
-package com.music.musicapp.util.music_objects.implementing_classes;
+package com.music.musicapp.util.implementing_classes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,11 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import com.music.musicapp.util.implementing_classes.SpotifyAlbum;
-import com.music.musicapp.util.implementing_classes.SpotifyArtist;
-import com.music.musicapp.util.implementing_classes.SpotifyImage;
-import com.music.musicapp.util.implementing_classes.SpotifyRestrictions;
-import com.music.musicapp.util.implementing_classes.SpotifyTrack;
 import com.music.musicapp.util.interfaces.Album;
 import com.music.musicapp.util.interfaces.Artist;
 import com.music.musicapp.util.interfaces.Track;

@@ -1,10 +1,8 @@
-package com.music.musicapp.util.music_objects.implementing_classes;
+package com.music.musicapp.util.implementing_classes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import com.music.musicapp.util.implementing_classes.SpotifyRestrictions;
 
 public class SpotifyRestrictionsTests {
 

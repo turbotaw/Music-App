@@ -1,4 +1,4 @@
-package com.music.musicapp.util.music_objects.implementing_classes;
+package com.music.musicapp.util.implementing_classes;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.music.musicapp.util.implementing_classes.SpotifyArtist;
 import com.music.musicapp.util.interfaces.Album;
 
 public class SpotifyArtistTests {

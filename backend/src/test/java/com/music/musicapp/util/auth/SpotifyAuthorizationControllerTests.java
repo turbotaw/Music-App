@@ -12,6 +12,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.music.musicapp.util.data_access.SpotifyTokenService;
 import com.music.musicapp.util.data_access.SpotifyTokenTable;
 
+import jakarta.servlet.http.HttpSession;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,10 +26,13 @@ import java.util.Optional;
 public class SpotifyAuthorizationControllerTests {
 
     @Mock
-     public SpotifySecretsConfig spotifySecretsConfig;
+    public SpotifySecretsConfig spotifySecretsConfig;
 
     @Mock
     private SpotifyTokenService spotifyTokenService;
+
+    @Mock
+    public HttpSession httpSession;
 
     @InjectMocks
     public SpotifyAuthorizationController spotifyAuthorizationController;;
@@ -41,17 +46,18 @@ public class SpotifyAuthorizationControllerTests {
 
     @Test
     public void testSpotifyLogin() {
-        
+
         // Act
-        RedirectView result = spotifyAuthorizationController.spotifyLogin();
+        RedirectView result = spotifyAuthorizationController.spotifyLogin(httpSession);
 
         // Verify
         verify(spotifyAuthorizationController.getSpotifySecretsConfig()).getClientId();
         verify(spotifyAuthorizationController.getSpotifySecretsConfig()).getRedirectUri();
-        
+
         // Assert
         assertNotNull(result);
-        assertTrue(result.getUrl().contains("https://accounts.spotify.com/authorize?response_type=code&client_id=testClientId&redirect_uri=testRedirectUri&scope=user-read-private user-read-email&code_challenge_method=S256&code_challenge="));
+        assertTrue(result.getUrl().contains(
+                "https://accounts.spotify.com/authorize?response_type=code&client_id=testClientId&redirect_uri=testRedirectUri&scope=user-read-private user-read-email&code_challenge_method=S256&code_challenge="));
     }
 
     @Test
@@ -66,7 +72,7 @@ public class SpotifyAuthorizationControllerTests {
         when(spotifyTokenService.setAuthorizationToken(userId, code)).thenReturn(Optional.of(mockTokenTable));
 
         // Act
-        String viewName = spotifyAuthorizationController.spotifyCallback(code, userId);
+        String viewName = spotifyAuthorizationController.spotifyCallback(code, userId, httpSession);
 
         // Verify
         verify(spotifyTokenService).setAuthorizationToken(userId, code);
