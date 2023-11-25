@@ -87,21 +87,16 @@ public class SpotifyTokenService {
                 return extractAccessTokenFromResponse(response.getBody());
             } else {
                 // Handle non-2xx responses
-                // Log the error or throw a custom exception
                 throw new RuntimeException("Failed to exchange code for token: " + response.getStatusCode());
             }
         } catch (RestClientException e) {
             // Handle client-side exceptions
-            // Log the error or throw a custom exception
             throw new RuntimeException("Error during REST call to exchange code for token", e);
         } catch (Exception e) {
             // Handle other exceptions, such as JSON parsing exceptions
-            // Log the error or throw a custom exception
             throw new RuntimeException("Error processing the token exchange response", e);
         }
     }
-
-    // Implement this method to extract the access token from the response JSON
     public SpotifyTokenResponse extractAccessTokenFromResponse(String responseBody) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -114,7 +109,6 @@ public class SpotifyTokenService {
             return new SpotifyTokenResponse(accessToken, refreshToken, expiresIn);
 
         } catch (Exception e) {
-            // Handle the exception appropriately
             throw new RuntimeException("Error parsing token response", e);
         }
     }

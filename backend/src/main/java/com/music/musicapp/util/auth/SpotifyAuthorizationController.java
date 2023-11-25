@@ -1,16 +1,9 @@
 package com.music.musicapp.util.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.music.musicapp.util.data_access.SpotifyTokenService;
@@ -60,7 +53,9 @@ public class SpotifyAuthorizationController {
     public String spotifyCallback(@RequestParam("code") String code, @RequestParam("user_id") Long user_id, HttpSession session) {
         String codeVerifier = (String) session.getAttribute("codeVerifier");
         SpotifyTokenResponse accessToken = spotifyTokenService.exchangeCodeForToken(code, codeVerifier);
+
         spotifyTokenService.setAuthorizationToken(user_id, code);
+        spotifyTokenService.setAccessToken(user_id, accessToken.getAccessToken());
         return "redirect:/";
     }
 

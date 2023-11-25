@@ -11,6 +11,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.music.musicapp.util.data_access.SpotifyTokenService;
 import com.music.musicapp.util.data_access.SpotifyTokenTable;
+import com.music.musicapp.util.implementing_classes.SpotifyTokenResponse;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -64,18 +65,24 @@ public class SpotifyAuthorizationControllerTests {
     void testSpotifyCallback() {
         // Arrange
         String code = "authorization_code";
+        String codeVerifier = "code_verifier";
         Long userId = 123L;
+        SpotifyTokenResponse mockTokenResponse = new SpotifyTokenResponse("access_token", "refresh_token", 3600);
         SpotifyTokenTable mockTokenTable = new SpotifyTokenTable();
 
-        // Assuming that setAuthorizationToken returns an Optional containing a token
-        // table
+        when(httpSession.getAttribute("codeVerifier")).thenReturn(codeVerifier);
+        when(spotifyTokenService.exchangeCodeForToken(code, codeVerifier)).thenReturn(mockTokenResponse);
         when(spotifyTokenService.setAuthorizationToken(userId, code)).thenReturn(Optional.of(mockTokenTable));
+        when(spotifyTokenService.setAccessToken(userId, mockTokenResponse.getAccessToken())).thenReturn(Optional.of(mockTokenTable));
 
         // Act
         String viewName = spotifyAuthorizationController.spotifyCallback(code, userId, httpSession);
 
         // Verify
+        verify(httpSession).getAttribute("codeVerifier");
+        verify(spotifyTokenService).exchangeCodeForToken(code, codeVerifier);
         verify(spotifyTokenService).setAuthorizationToken(userId, code);
+        verify(spotifyTokenService).setAccessToken(userId, mockTokenResponse.getAccessToken());
         assertEquals("redirect:/", viewName);
     }
 
