@@ -28,7 +28,8 @@ public class SpotifyTokenService {
     private final SpotifyTokenRepository spotifyTokenRepository;
 
     @Autowired
-    public SpotifyTokenService(SpotifyTokenRepository spotifyTokenRepository, SpotifySecretsConfig spotifySecretsConfig, RestTemplate restTemplate) {
+    public SpotifyTokenService(SpotifyTokenRepository spotifyTokenRepository, SpotifySecretsConfig spotifySecretsConfig,
+            RestTemplate restTemplate) {
         this.spotifyTokenRepository = spotifyTokenRepository;
         this.spotifySecretsConfig = spotifySecretsConfig;
         this.restTemplate = restTemplate;
@@ -70,19 +71,19 @@ public class SpotifyTokenService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setBasicAuth(spotifySecretsConfig.getClientId(), spotifySecretsConfig.getClientSecret());
-    
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type", "authorization_code");
         map.add("code", code);
         map.add("redirect_uri", spotifySecretsConfig.getRedirectUri());
         map.add("code_verifier", codeVerifier);
-    
+
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-    
+
         try {
             ResponseEntity<String> response = restTemplate.postForEntity("https://accounts.spotify.com/api/token",
                     request, String.class);
-    
+
             if (response.getStatusCode().is2xxSuccessful()) {
                 return extractAccessTokenFromResponse(response.getBody());
             } else {
@@ -97,6 +98,7 @@ public class SpotifyTokenService {
             throw new RuntimeException("Error processing the token exchange response", e);
         }
     }
+
     public SpotifyTokenResponse extractAccessTokenFromResponse(String responseBody) {
         try {
             ObjectMapper mapper = new ObjectMapper();

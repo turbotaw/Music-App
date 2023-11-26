@@ -3,6 +3,7 @@ package com.music.musicapp.util.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -29,7 +30,7 @@ public class SpotifyAuthorizationController {
         return spotifySecretsConfig;
     }
 
-    @GetMapping("/login/spotify")
+    @PostMapping("/login/spotify")
     public RedirectView spotifyLogin(HttpSession session) {
         String clientId = spotifySecretsConfig.getClientId();
         String redirectUri = spotifySecretsConfig.getRedirectUri();
