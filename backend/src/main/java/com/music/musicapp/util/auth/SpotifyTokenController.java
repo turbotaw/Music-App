@@ -50,33 +50,33 @@ public class SpotifyTokenController {
     }
 
     @PostMapping("/token/auth/set")
-    public Map<String, Object> setAuthorizationToken(@RequestParam Long user_id, @RequestParam String token) {
-        Optional<SpotifyTokenTable> updatedToken = spotifyTokenService.setAuthorizationToken(user_id, token);
+public Map<String, Object> setAuthorizationToken(@RequestParam Long user_id, @RequestParam String token) {
+    SpotifyTokenTable updatedToken = spotifyTokenService.setAuthorizationToken(user_id, token);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("user_id", user_id);
-        if (updatedToken.isPresent()) {
-            response.put("token", token);
-        } else {
-            response.put("error", "User not found or update failed");
-        }
-
-        return response;
+    Map<String, Object> response = new HashMap<>();
+    response.put("user_id", user_id);
+    if (updatedToken != null) {
+        response.put("token", token);
+    } else {
+        response.put("error", "User not found or update failed");
     }
 
-    @PostMapping("/token/access/set")
-    public Map<String, Object> setAccessToken(@RequestParam Long user_id, @RequestParam String token) {
-        Optional<SpotifyTokenTable> updatedToken = spotifyTokenService.setAccessToken(user_id, token);
+    return response;
+}
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("user_id", user_id);
-        if (updatedToken.isPresent()) {
-            response.put("access_token", token);
-        } else {
-            response.put("error", "User not found or update failed");
-        }
+@PostMapping("/token/access/set")
+public Map<String, Object> setAccessToken(@RequestParam Long user_id, @RequestParam String token) {
+    SpotifyTokenTable updatedToken = spotifyTokenService.setAccessToken(user_id, token);
 
-        return response;
+    Map<String, Object> response = new HashMap<>();
+    response.put("user_id", user_id);
+    if (updatedToken != null) {
+        response.put("access_token", token);
+    } else {
+        response.put("error", "User not found or update failed");
     }
+
+    return response;
+}
 
 }

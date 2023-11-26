@@ -13,13 +13,13 @@ public class SpotifyTokenTable {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "access_token", length = 255)
+    @Column(name = "access_token", length = 400)
     private String accessToken;
 
-    @Column(name = "auth_token", length = 255)
+    @Column(name = "auth_token", length = 400)
     private String authToken;
 
-    @Column(name = "refresh_token", length = 255)
+    @Column(name = "refresh_token", length = 400)
     private String refreshToken;
 
     public Long getUserId() {

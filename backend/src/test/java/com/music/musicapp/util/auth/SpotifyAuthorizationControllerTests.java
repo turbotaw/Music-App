@@ -72,8 +72,8 @@ public class SpotifyAuthorizationControllerTests {
 
         when(httpSession.getAttribute("codeVerifier")).thenReturn(codeVerifier);
         when(spotifyTokenService.exchangeCodeForToken(code, codeVerifier)).thenReturn(mockTokenResponse);
-        when(spotifyTokenService.setAuthorizationToken(userId, code)).thenReturn(Optional.of(mockTokenTable));
-        when(spotifyTokenService.setAccessToken(userId, mockTokenResponse.getAccessToken())).thenReturn(Optional.of(mockTokenTable));
+        when(spotifyTokenService.setAuthorizationToken(userId, code)).thenReturn(mockTokenTable);
+        when(spotifyTokenService.setAccessToken(userId, mockTokenResponse.getAccessToken())).thenReturn(mockTokenTable);
 
         // Act
         String viewName = spotifyAuthorizationController.spotifyCallback(code, userId, httpSession);

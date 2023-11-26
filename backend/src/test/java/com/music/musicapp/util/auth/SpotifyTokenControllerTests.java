@@ -36,12 +36,13 @@ public class SpotifyTokenControllerTests {
         assertEquals(expectedToken, result.get("auth_token"));
         verify(spotifyTokenService).getAuthorizationToken(userId);
     }
+
     @Test
-    void testGetAuthorizationTokenFailed(){
+    void testGetAuthorizationTokenFailed() {
         Long userId = 123L;
         when(spotifyTokenService.getAuthorizationToken(userId)).thenReturn(Optional.empty());
         Map<String, Object> result = spotifyTokenController.getAuthorizationToken(userId);
-    
+
         assertEquals(userId, result.get("user_id"));
         assertNull(result.get("auth_token"));
         assertNotNull(result.get("error"));
@@ -59,6 +60,7 @@ public class SpotifyTokenControllerTests {
         assertEquals(expectedAccessToken, result.get("access_token"));
         verify(spotifyTokenService).getAccessToken(userId);
     }
+
     @Test
     void testGetAccessTokenFailed() {
         Long userId2 = 456L;
@@ -70,13 +72,13 @@ public class SpotifyTokenControllerTests {
         assertNotNull(result2.get("error"));
         verify(spotifyTokenService).getAccessToken(userId2);
     }
-    
+
     @Test
     void testSetAuthorizationToken() {
         // Arrange
         Long userId = 123L;
         String token = "authTokenValue";
-        Optional<SpotifyTokenTable> updatedToken = Optional.of(new SpotifyTokenTable());
+        SpotifyTokenTable updatedToken = new SpotifyTokenTable();
         when(spotifyTokenService.setAuthorizationToken(userId, token)).thenReturn(updatedToken);
 
         // Act
@@ -93,7 +95,7 @@ public class SpotifyTokenControllerTests {
         // Arrange
         Long userId = 123L;
         String token = "authTokenValue";
-        Optional<SpotifyTokenTable> updatedToken = Optional.empty(); // Update failed
+        SpotifyTokenTable updatedToken = null; // Update failed
         when(spotifyTokenService.setAuthorizationToken(userId, token)).thenReturn(updatedToken);
 
         // Act
@@ -110,7 +112,7 @@ public class SpotifyTokenControllerTests {
         // Arrange
         Long userId = 123L;
         String token = "accessTokenValue";
-        Optional<SpotifyTokenTable> updatedToken = Optional.of(new SpotifyTokenTable());
+        SpotifyTokenTable updatedToken = new SpotifyTokenTable();
         when(spotifyTokenService.setAccessToken(userId, token)).thenReturn(updatedToken);
 
         // Act
@@ -127,7 +129,7 @@ public class SpotifyTokenControllerTests {
         // Arrange
         Long userId = 123L;
         String token = "accessTokenValue";
-        Optional<SpotifyTokenTable> updatedToken = Optional.empty(); // Update failed
+        SpotifyTokenTable updatedToken = null; // Update failed
         when(spotifyTokenService.setAccessToken(userId, token)).thenReturn(updatedToken);
 
         // Act
