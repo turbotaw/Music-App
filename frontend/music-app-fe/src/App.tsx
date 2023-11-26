@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { UserProvider, useUser } from './UserContext';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import SpotifyRequest from './SpotifyRequest';
+import SpotifyRequest from './SpotifyComponent';
 import { useNavigate } from 'react-router-dom';
+import SpotifyComponent from './SpotifyComponent';
 
-const UserInput = () => {
+interface UserInputProps {
+  setUserId: (userId: string) => void;
+}
+
+const UserInput: React.FC = () => {
   const [input, setInput] = useState<string>('');
-  const { setUserId } = useUser();
   const navigate = useNavigate();
+  const { setUserId } = useUser();
+
 
   const handleSubmit = () => {
     setUserId(input);
     navigate('/spotify-request');
-    
   };
 
   return (
@@ -28,18 +33,22 @@ const UserInput = () => {
   );
 };
 
-const DisplayUserId = () => {
+
+const DisplayUserId: React.FC = () => {
   const { userId } = useUser();
+
   return <div>Submitted User ID: {userId}</div>;
 };
 
 const App = () => {
+  const [userId, setUserId] = useState<string>('');
+
   return (
     <UserProvider>
-      <Router> {/* Wrap everything within Router */}
+      <Router>
         <div className="App">
           <Routes>
-            <Route path="/spotify-request" element={<SpotifyRequest />} />
+            <Route path="/spotify-request" element={<SpotifyComponent />} />
           </Routes>
           <UserInput />
           <DisplayUserId />
@@ -48,5 +57,6 @@ const App = () => {
     </UserProvider>
   );
 };
+
 
 export default App;
