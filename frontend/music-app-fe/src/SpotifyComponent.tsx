@@ -62,7 +62,7 @@ const SpotifyComponent: React.FC = () => {
   }
   const setAuthorizationToken = async () => {
     const userId = localStorage.getItem('userId');
-    const token = localStorage.getItem('code');
+    const token = localStorage.getItem('spotify_access_token');
     const refreshToken = localStorage.getItem('spotify_refresh_token');
     const expires_in = localStorage.getItem('spotify_token_expires_in')
     console.log("token: ", token);

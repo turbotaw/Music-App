@@ -35,7 +35,8 @@ const useSpotifyAuth = () => {
   const initiateAuthRequest = async (): Promise<void> => {
     const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
     const redirectUri = encodeURIComponent(process.env.REACT_APP_SPOTIFY_REDIRECT_URI ?? '');
-    const scopes = encodeURIComponent('user-read-private user-read-email');
+    const scopes = encodeURIComponent('user-top-read user-read-private user-read-email user-library-read user-top-read'); //user-top-read user-read-private user-read-email user-library-read 
+    //user-read-private user-read-email user-library-read 
 
     const codeVerifier = generateRandomString(64);
     const codeChallenge = await generateCodeChallenge(codeVerifier);
@@ -65,6 +66,7 @@ const useSpotifyAuth = () => {
     }
 
     const data = await response.json();
+    
     localStorage.setItem('spotify_access_token', data.access_token);
     localStorage.setItem('spotify_token_expires_in', data.expires_in);
     localStorage.setItem('spotify_refresh_token', data.refresh_token);
