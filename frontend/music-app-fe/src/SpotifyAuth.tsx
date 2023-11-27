@@ -36,10 +36,10 @@ const useSpotifyAuth = () => {
     const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
     const redirectUri = encodeURIComponent(process.env.REACT_APP_SPOTIFY_REDIRECT_URI ?? '');
     const scopes = encodeURIComponent('user-read-private user-read-email');
-    
+
     const codeVerifier = generateRandomString(64);
     const codeChallenge = await generateCodeChallenge(codeVerifier);
-  
+
     localStorage.setItem('spotify_code_verifier', codeVerifier);
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scopes}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
     window.location.href = authUrl;

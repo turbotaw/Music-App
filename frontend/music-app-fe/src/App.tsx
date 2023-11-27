@@ -40,19 +40,24 @@ const DisplayUserId: React.FC = () => {
   return <div>Submitted User ID: {userId}</div>;
 };
 
-const App = () => {
-  const [userId, setUserId] = useState<string>('');
+const HomePage: React.FC = () => {
+  return (
+    <div>
+      <h1>Welcome to the Home Page</h1>
+    </div>
+  );
+};
 
+const App: React.FC = () => {
   return (
     <UserProvider>
       <Router>
-        <div className="App">
-          <Routes>
-            <Route path="/spotify-request" element={<SpotifyComponent />} />
-          </Routes>
-          <UserInput />
-          <DisplayUserId />
-        </div>
+        <Routes>
+          <Route path="/spotify-request" element={<SpotifyComponent />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+        <UserInput />
+        <DisplayUserId />
       </Router>
     </UserProvider>
   );

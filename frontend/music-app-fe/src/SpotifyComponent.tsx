@@ -1,4 +1,3 @@
-// SpotifyComponent.tsx
 import React, { useEffect } from 'react';
 import useSpotifyAuth from './SpotifyAuth';
 
@@ -8,29 +7,29 @@ const SpotifyComponent: React.FC = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    if(code){
-        localStorage.setItem('code', code);
+    if (code) {
+      localStorage.setItem('code', code);
     }
 
     if (code && !isAuthenticated) {
-        exchangeCodeForToken(code)
-          .then(() => {
-            if (isAuthenticated) {
-              setAuthorizationToken();
-            }
-          })
-          .catch(error => console.error('Error in exchangeCodeForToken:', error));
-    
-        window.history.replaceState(null, '', window.location.pathname);
-      }
-    }, [isAuthenticated]);
+      exchangeCodeForToken(code)
+        .then(() => {
+          if (isAuthenticated) {
+            setAuthorizationToken();
+          }
+        })
+        .catch(error => console.error('Error in exchangeCodeForToken:', error));
 
-    useEffect(() => {
-      if (isAuthenticated) {
-          setAuthorizationToken()
-              .then(() => setRefreshToken())
-              .catch(error => console.error('Error in setRefreshToken:', error));
-      }
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setAuthorizationToken()
+        .then(() => setRefreshToken())
+        .catch(error => console.error('Error in setRefreshToken:', error));
+    }
   }, [isAuthenticated]);
 
   const handleLogin = () => {
@@ -44,22 +43,22 @@ const SpotifyComponent: React.FC = () => {
     console.log("refreshToken: ", refreshToken);
 
     try {
-        const response = await fetch(`http://localhost:8080/token/access/set?user_id=${userId}&token=${encodeURIComponent(refreshToken ?? '')}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-  
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+      const response = await fetch(`http://localhost:8080/token/access/set?user_id=${userId}&token=${encodeURIComponent(refreshToken ?? '')}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
         }
-  
-        const data = await response.json();
-        console.log('Response data:', data);
-      } catch (error) {
-        console.error('There was an error!', error);
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
+
+      const data = await response.json();
+      console.log('Response data:', data);
+    } catch (error) {
+      console.error('There was an error!', error);
+    }
   }
   const setAuthorizationToken = async () => {
     const userId = localStorage.getItem('userId');
@@ -71,7 +70,7 @@ const SpotifyComponent: React.FC = () => {
     console.log("refreshToken: ", refreshToken);
     console.log("expires_in: ", expires_in);
 
-    
+
     try {
       const response = await fetch(`http://localhost:8080/token/auth/set?user_id=${userId}&token=${encodeURIComponent(token ?? '')}`, {
         method: 'POST',
