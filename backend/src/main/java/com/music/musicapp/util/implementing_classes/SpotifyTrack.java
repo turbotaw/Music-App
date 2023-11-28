@@ -1,5 +1,7 @@
 package com.music.musicapp.util.implementing_classes;
 
+import java.util.function.BooleanSupplier;
+
 import com.music.musicapp.util.interfaces.Album;
 import com.music.musicapp.util.interfaces.Artist;
 import com.music.musicapp.util.interfaces.Track;
@@ -113,5 +115,9 @@ public class SpotifyTrack implements Track {
 
     public void setLocal(boolean local) {
         isLocal = local;
+    }
+
+    public BooleanSupplier getIsPlayable() {
+        return null;
     }
 }

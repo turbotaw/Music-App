@@ -17,7 +17,7 @@ public class SpotifyUserRequestService {
     private SpotifyTokenService spotifyTokenService;
 
     public String getTopTracks(int offset, Long user_id) {
-        String baseUrl = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term";
+        String baseUrl = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term";
         Optional<String> authToken = spotifyTokenService.getAuthorizationToken(user_id);
         if (!authToken.isPresent()) {
             throw new IllegalStateException("No auth token present for user " + user_id);
