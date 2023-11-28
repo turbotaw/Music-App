@@ -2,7 +2,6 @@ package com.music.musicapp.util.data_access;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,7 +26,6 @@ public class SpotifyTokenService {
     private final SpotifySecretsConfig spotifySecretsConfig;
     private final SpotifyTokenRepository spotifyTokenRepository;
 
-    @Autowired
     public SpotifyTokenService(SpotifyTokenRepository spotifyTokenRepository, SpotifySecretsConfig spotifySecretsConfig, RestTemplate restTemplate) {
         this.spotifyTokenRepository = spotifyTokenRepository;
         this.spotifySecretsConfig = spotifySecretsConfig;

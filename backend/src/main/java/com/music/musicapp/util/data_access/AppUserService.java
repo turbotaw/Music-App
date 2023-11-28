@@ -1,6 +1,5 @@
 package com.music.musicapp.util.data_access;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -9,7 +8,6 @@ public class AppUserService {
 
     private final AppUserRepository appUserRepository;
 
-    @Autowired
     public AppUserService(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
     }

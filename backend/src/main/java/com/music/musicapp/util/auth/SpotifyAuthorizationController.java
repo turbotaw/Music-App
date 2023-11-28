@@ -18,10 +18,9 @@ public class SpotifyAuthorizationController {
     private final SpotifySecretsConfig spotifySecretsConfig;
     private String codeVerifier;
 
-    @Autowired 
-    SpotifyTokenService spotifyTokenService;
-    
     @Autowired
+    SpotifyTokenService spotifyTokenService;
+
     public SpotifyAuthorizationController(SpotifySecretsConfig spotifySecretsConfig) {
         this.spotifySecretsConfig = spotifySecretsConfig;
     }
@@ -51,7 +50,8 @@ public class SpotifyAuthorizationController {
     }
 
     @GetMapping("/callback")
-    public String spotifyCallback(@RequestParam("code") String code, @RequestParam("user_id") Long user_id, HttpSession session) {
+    public String spotifyCallback(@RequestParam("code") String code, @RequestParam("user_id") Long user_id,
+            HttpSession session) {
         String codeVerifier = (String) session.getAttribute("codeVerifier");
         SpotifyTokenResponse accessToken = spotifyTokenService.exchangeCodeForToken(code, codeVerifier);
 
@@ -60,5 +60,4 @@ public class SpotifyAuthorizationController {
         return "redirect:/";
     }
 
-    
 }
