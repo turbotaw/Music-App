@@ -78,7 +78,7 @@ public class SpotifyTokenServiceTest {
         // Mock the behavior of the repository for save
         when(spotifyTokenRepository.save(any(SpotifyTokenTable.class))).thenAnswer(invocation -> {
             SpotifyTokenTable savedTokenTable = invocation.getArgument(0);
-            return savedTokenTable; // Return the same object that was saved
+            return savedTokenTable;
         });
 
         // Act
@@ -86,7 +86,7 @@ public class SpotifyTokenServiceTest {
 
         // Assert
         assertNotNull(result);
-        assertEquals(userId, result.getUserId()); // Verify that userId is set correctly
+        assertEquals(userId, result.getUserId());
         assertEquals(token, result.getAccessToken());
 
         // Verify that findById was called with the correct userId
@@ -105,11 +105,8 @@ public class SpotifyTokenServiceTest {
         Long userId = 123L;
         String newToken = "newAccessToken";
 
-        // Mock the behavior of the repository to return an empty Optional (token not
-        // found)
         when(spotifyTokenRepository.findById(userId)).thenReturn(Optional.empty());
 
-        // Mock the save operation
         when(spotifyTokenRepository.save(any(SpotifyTokenTable.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
@@ -146,7 +143,6 @@ public class SpotifyTokenServiceTest {
         SpotifyTokenTable mockTokenTable = new SpotifyTokenTable();
         mockTokenTable.setAuthToken(code);
 
-        // Mock the behavior of the repository
         when(spotifyTokenRepository.findById(123L)).thenReturn(Optional.of(mockTokenTable));
         spotifyTokenService.setAuthorizationToken(123L, code);
 
@@ -165,8 +161,6 @@ public class SpotifyTokenServiceTest {
         Long userId = 123L;
         String newToken = "newAuthorizationToken";
 
-        // Mock the behavior of the repository to return an empty Optional (token not
-        // found)
         when(spotifyTokenRepository.findById(userId)).thenReturn(Optional.empty());
 
         // Mock the save operation
@@ -193,7 +187,7 @@ public class SpotifyTokenServiceTest {
         String token = "authorizationToken";
         SpotifyTokenTable existingTokenTable = new SpotifyTokenTable();
         existingTokenTable.setUserId(userId);
-        existingTokenTable.setAuthToken("initialToken"); // Set an initial token
+        existingTokenTable.setAuthToken("initialToken");
 
         // Mock the behavior of the repository
         when(spotifyTokenRepository.findById(userId)).thenReturn(Optional.of(existingTokenTable));
@@ -205,7 +199,7 @@ public class SpotifyTokenServiceTest {
         // Assert
         assertNotNull(result);
         assertEquals(userId, result.getUserId());
-        assertEquals(token, result.getAuthToken()); // Check that the authorization token is updated
+        assertEquals(token, result.getAuthToken());
 
         // Verify that findById and save methods were called
         verify(spotifyTokenRepository).findById(userId);

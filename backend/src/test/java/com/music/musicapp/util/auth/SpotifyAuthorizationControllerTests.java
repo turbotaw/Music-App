@@ -20,8 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
-import java.util.Optional;
-
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-secrets.properties")
 public class SpotifyAuthorizationControllerTests {

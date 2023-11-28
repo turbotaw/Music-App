@@ -41,8 +41,7 @@ public class SpotifyUserRequestServiceTests {
                 anyString(),
                 any(HttpMethod.class),
                 any(HttpEntity.class),
-                eq(String.class))
-        ).thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
+                eq(String.class))).thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
         String actualResponse = spotifyUserRequestService.getTopTracks(0, 1L);
 
