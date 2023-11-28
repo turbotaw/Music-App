@@ -47,7 +47,6 @@ public class SpotifyAuthorizationControllerTests {
 
     @Test
     public void testSpotifyLogin() {
-
         // Act
         RedirectView result = spotifyAuthorizationController.spotifyLogin(httpSession);
 
@@ -58,8 +57,9 @@ public class SpotifyAuthorizationControllerTests {
         // Assert
         assertNotNull(result);
         assertTrue(Optional.ofNullable(result.getUrl())
-                   .map(url -> url.contains("https://accounts.spotify.com/authorize?response_type=code&client_id=testClientId&redirect_uri=testRedirectUri&scope=user-read-private user-read-email&code_challenge_method=S256&code_challenge="))
-                   .orElseThrow(NullPointerException::new));
+                .map(url -> url.contains(
+                        "https://accounts.spotify.com/authorize?response_type=code&client_id=testClientId&redirect_uri=testRedirectUri&scope=user-read-private user-read-email&code_challenge_method=S256&code_challenge="))
+                .orElseThrow(NullPointerException::new));
     }
 
     @Test
