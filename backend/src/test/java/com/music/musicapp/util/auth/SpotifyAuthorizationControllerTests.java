@@ -20,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+import java.util.Optional;
+
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-secrets.properties")
 public class SpotifyAuthorizationControllerTests {
@@ -55,8 +57,9 @@ public class SpotifyAuthorizationControllerTests {
 
         // Assert
         assertNotNull(result);
-        assertTrue(result.getUrl().contains(
-                "https://accounts.spotify.com/authorize?response_type=code&client_id=testClientId&redirect_uri=testRedirectUri&scope=user-read-private user-read-email&code_challenge_method=S256&code_challenge="));
+        assertTrue(Optional.ofNullable(result.getUrl())
+                   .map(url -> url.contains("https://accounts.spotify.com/authorize?response_type=code&client_id=testClientId&redirect_uri=testRedirectUri&scope=user-read-private user-read-email&code_challenge_method=S256&code_challenge="))
+                   .orElseThrow(NullPointerException::new));
     }
 
     @Test
