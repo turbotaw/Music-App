@@ -15,12 +15,16 @@ public class SpotifyTrackTests {
 
     private SpotifyTrack spotifyTrack;
     private Artist artist;
+    private Artist artist2;
     private Album album;
+    private Album album2;
 
     @BeforeEach
     public void setUp() {
         artist = mock(Artist.class);
+        artist2 = mock(Artist.class);
         album = mock(Album.class);
+        album2 = mock(Album.class);
 
         spotifyTrack = new SpotifyTrack(
             "Test Track",
@@ -47,6 +51,18 @@ public class SpotifyTrackTests {
     }
 
     @Test
+    public void testSetArtist() {
+        spotifyTrack.setArtist(artist2);
+        assertEquals(artist2, spotifyTrack.getArtist());
+    }
+
+    @Test
+    public void testSetAlbum() {
+        spotifyTrack.setAlbum(album2);
+        assertEquals(album2, spotifyTrack.getAlbum());
+    }
+
+    @Test
     public void testGetAlbum() {
         assertEquals(album, spotifyTrack.getAlbum());
     }
@@ -68,7 +84,7 @@ public class SpotifyTrackTests {
 
     @Test
     public void testIsPlayable() {
-        assertEquals(true, spotifyTrack.isPlayable());
+        assertEquals(true, spotifyTrack.getIsPlayable());
     }
 
     @Test
@@ -113,7 +129,7 @@ public class SpotifyTrackTests {
     @Test
     public void testSetPlayable() {
         spotifyTrack.setPlayable(false);
-        assertFalse(spotifyTrack.isPlayable());
+        assertFalse(spotifyTrack.getIsPlayable());
     }
 
     @Test

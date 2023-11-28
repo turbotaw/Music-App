@@ -142,7 +142,7 @@ public class SpotifyJsonParserTests {
         assertTrue(tracks.get(0).getPreviewUrl().isEmpty(), "First track should not have a preview URL");
         assertNotNull(tracks.get(0).getPreviewUrl(), "First track should not have a preview URL");
 
-        assertTrue((tracks.get(0).isPlayable()), "First track should be playable");
+        assertTrue((tracks.get(0).getIsPlayable()), "First track should be playable");
         assertTrue(tracks.get(1).getPreviewUrl().isEmpty(), "Second track should not have a preview URL");
     }
 }
