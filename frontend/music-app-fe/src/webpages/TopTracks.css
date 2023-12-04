@@ -1,0 +1,78 @@
+.tracks-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+    gap: 20px; /* Space between grid items */
+}
+
+.top-tracks {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px; /* Space at the bottom of each item */
+    /* Remove max-width if you want each card to be flexible within the grid */
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: start; /* Align items to the top */
+    padding-top: 50px;
+    height: auto; /* Let the height adapt to the content */
+}
+
+.top-tracks h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.top-tracks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.top-tracks li {
+    padding: 5px 0;
+    border-bottom: 1px dashed #ccc; /* Using a dashed border with a lighter color */
+}
+
+
+.top-tracks li:last-child {
+    border-bottom: none;
+}
+.track-skeleton {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.skeleton-header {
+    height: 20px;
+    background-color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.skeleton-list {
+    list-style: none;
+    padding: 0;
+}
+
+.skeleton-item {
+    height: 10px;
+    background-color: #e0e0e0;
+    margin: 5px 0;
+    border-radius: 4px;
+}
+
+/* Responsive Design: Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .tracks-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .tracks-container {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+}

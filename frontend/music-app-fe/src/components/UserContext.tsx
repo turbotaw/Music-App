@@ -37,3 +37,5 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
 };
 
 export const useUser = () => useContext(UserContext);
+
+export { useContext };

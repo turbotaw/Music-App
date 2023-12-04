@@ -1,5 +1,42 @@
-import React, { useEffect } from 'react';
-import useSpotifyAuth from './SpotifyAuth';
+import React, { useEffect, useState } from 'react';
+import useSpotifyAuth from '../webpages/SpotifyAuth';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from './UserContext';
+
+interface UserInputProps {
+  setUserId: (userId: string) => void;
+}
+
+const UserInput: React.FC = () => {
+  const [input, setInput] = useState<string>('');
+  const navigate = useNavigate();
+  const { setUserId } = useUser();
+
+
+  const handleSubmit = () => {
+    setUserId(input);
+    navigate('/spotify-request');
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Enter user ID"
+      />
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+};
+
+
+const DisplayUserId: React.FC = () => {
+  const { userId } = useUser();
+
+  return <div>Submitted User ID: {userId}</div>;
+};
 
 const SpotifyComponent: React.FC = () => {
   const { initiateAuthRequest, exchangeCodeForToken, isAuthenticated } = useSpotifyAuth();
@@ -93,12 +130,19 @@ const SpotifyComponent: React.FC = () => {
   return (
     <div>
       {!isAuthenticated ? (
-        <button onClick={handleLogin}>Login with Spotify</button>
+        <div>
+          <button onClick={handleLogin}>Login with Spotify</button>
+          <UserInput />  {/* Moved UserInput here to always show */}
+        </div>
       ) : (
-        <div>Authenticated with Spotify</div>
+        <div>
+          <div>Authenticated with Spotify</div>
+        </div>
       )}
+      <DisplayUserId />  {/* DisplayUserId can be outside to always show */}
     </div>
   );
 };
+
 
 export default SpotifyComponent;

@@ -1,45 +1,12 @@
 import React, { useState } from 'react';
-import { UserProvider, useUser } from './UserContext';
+import { UserProvider, useUser } from './components/UserContext';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import SpotifyRequest from './SpotifyComponent';
+import SpotifyRequest from './components/SpotifyComponent';
 import { useNavigate } from 'react-router-dom';
-import SpotifyComponent from './SpotifyComponent';
-import TopTracksPage from './TopTracksPage';
-
-interface UserInputProps {
-  setUserId: (userId: string) => void;
-}
-
-const UserInput: React.FC = () => {
-  const [input, setInput] = useState<string>('');
-  const navigate = useNavigate();
-  const { setUserId } = useUser();
-
-
-  const handleSubmit = () => {
-    setUserId(input);
-    navigate('/spotify-request');
-  };
-
-  return (
-    <div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Enter user ID"
-      />
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
-  );
-};
-
-
-const DisplayUserId: React.FC = () => {
-  const { userId } = useUser();
-
-  return <div>Submitted User ID: {userId}</div>;
-};
+import SpotifyComponent from './components/SpotifyComponent';
+import TopTracksPage from './webpages/TopTracksPage';
+import NavigationBar from './components/NavigationBar';
+import './App.css';
 
 const HomePage: React.FC = () => {
   return (
@@ -58,13 +25,12 @@ const App: React.FC = () => {
   return (
     <UserProvider>
       <Router>
+      <NavigationBar />
         <Routes>
           <Route path="/spotify-request" element={<SpotifyComponent />} />
           <Route path="/top-tracks" element={<TopTracksPage />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
-        <UserInput />
-        <DisplayUserId />
       </Router>
     </UserProvider>
   );
