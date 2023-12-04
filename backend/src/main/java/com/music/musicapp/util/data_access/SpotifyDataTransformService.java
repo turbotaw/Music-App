@@ -19,8 +19,8 @@ public class SpotifyDataTransformService {
     @Autowired
     private SpotifyUserRequestService spotifyUserRequestService;
 
-    public List<String> transformTopTracksAndArtist(int actualOffset, Long user_id) throws ParseException{
-        List<SpotifyTrack> trackList = spotifyJsonParser.parseJsonToSpotifyTracks(spotifyUserRequestService.getTopTracks(actualOffset, user_id));
+    public List<String> transformTopTracksAndArtist(int actualOffset, Long user_id, String time_range) throws ParseException{
+        List<SpotifyTrack> trackList = spotifyJsonParser.parseJsonToSpotifyTracks(spotifyUserRequestService.getTopTracks(actualOffset, user_id, time_range));
         List<String> trackAndArtist = new ArrayList<>();
         for(SpotifyTrack track : trackList){
             String trackName = track.getTrackName();

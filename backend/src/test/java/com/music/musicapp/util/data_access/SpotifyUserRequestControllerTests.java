@@ -41,13 +41,16 @@ public class SpotifyUserRequestControllerTests {
     public void getTopTracks_WithOffset_ShouldReturnArtistNames() throws Exception {
         long userId = 1L;
         int offset = 0;
+        String timeFrame = "medium_term";
         List<String> mockResponse = Arrays.asList("Track 1 - Artist 1", "Track 2 - Artist 2");
 
-        given(spotifyDataTransformService.transformTopTracksAndArtist(offset, userId)).willReturn(mockResponse);
+        given(spotifyDataTransformService.transformTopTracksAndArtist(offset, userId, timeFrame))
+                .willReturn(mockResponse);
 
         mockMvc.perform(get("/spotify/top-tracks")
                 .param("user_id", String.valueOf(userId))
-                .param("offset", String.valueOf(offset)))
+                .param("offset", String.valueOf(offset))
+                .param("time_range", String.valueOf(timeFrame)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -58,12 +61,14 @@ public class SpotifyUserRequestControllerTests {
     @Test
     public void getTopTracks_WithoutOffset_ShouldReturnArtistNames() throws Exception {
         long userId = 1L;
+        String timeFrame = "medium_term";
         List<String> mockResponse = Arrays.asList("Track 1 - Artist 1", "Track 2 - Artist 2");
 
-        given(spotifyDataTransformService.transformTopTracksAndArtist(0, userId)).willReturn(mockResponse);
+        given(spotifyDataTransformService.transformTopTracksAndArtist(0, userId, timeFrame)).willReturn(mockResponse);
 
         mockMvc.perform(get("/spotify/top-tracks")
-                .param("user_id", String.valueOf(userId)))
+                .param("user_id", String.valueOf(userId))
+                .param("time_range", String.valueOf(timeFrame)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(2)))

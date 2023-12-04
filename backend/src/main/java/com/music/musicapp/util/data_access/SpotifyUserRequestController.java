@@ -17,9 +17,10 @@ public class SpotifyUserRequestController {
     @GetMapping("/top-tracks")
     public List<String> getTopTracks(
             @RequestParam Long user_id,
+            @RequestParam String time_range,
             @RequestParam Optional<Integer> offset) throws ParseException {
 
         int actualOffset = offset.orElse(0);
-        return spotifyDataTransformService.transformTopTracksAndArtist(actualOffset, user_id);
+        return spotifyDataTransformService.transformTopTracksAndArtist(actualOffset, user_id, time_range);
     }
 }

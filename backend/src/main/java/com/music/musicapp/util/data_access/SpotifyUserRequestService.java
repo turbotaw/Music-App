@@ -16,8 +16,9 @@ public class SpotifyUserRequestService {
     @Autowired
     private SpotifyTokenService spotifyTokenService;
 
-    public String getTopTracks(int offset, Long user_id) {
-        String baseUrl = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term";
+    public String getTopTracks(int offset, Long user_id, String timeRange) {
+        String baseUrl = "https://api.spotify.com/v1/me/top/tracks";
+
         Optional<String> authToken = spotifyTokenService.getAuthorizationToken(user_id);
         if (!authToken.isPresent()) {
             throw new IllegalStateException("No auth token present for user " + user_id);
@@ -26,6 +27,7 @@ public class SpotifyUserRequestService {
 
         // Constructing the URL with query parameters
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(baseUrl)
+                .queryParam("time_range", timeRange) // Use the timeRange parameter
                 .queryParam("offset", offset);
 
         HttpHeaders headers = new HttpHeaders();

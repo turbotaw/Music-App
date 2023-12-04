@@ -36,6 +36,7 @@ public class SpotifyUserRequestServiceTests {
     @Test
     void getTopTracks_WhenTokenPresent_ShouldReturnTracks() {
         String expectedResponse = "some JSON string";
+        String timeFrame = "medium_term";
         when(spotifyTokenService.getAuthorizationToken(anyLong())).thenReturn(Optional.of("validToken"));
         when(restTemplate.exchange(
                 anyString(),
@@ -43,15 +44,16 @@ public class SpotifyUserRequestServiceTests {
                 any(HttpEntity.class),
                 eq(String.class))).thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        String actualResponse = spotifyUserRequestService.getTopTracks(0, 1L);
+        String actualResponse = spotifyUserRequestService.getTopTracks(0, 1L, timeFrame);
 
         assertEquals(expectedResponse, actualResponse);
     }
 
     @Test
     void getTopTracks_WhenTokenNotPresent_ShouldThrowException() {
+        
         when(spotifyTokenService.getAuthorizationToken(anyLong())).thenReturn(Optional.empty());
 
-        assertThrows(IllegalStateException.class, () -> spotifyUserRequestService.getTopTracks(0, 1L));
+        assertThrows(IllegalStateException.class, () -> spotifyUserRequestService.getTopTracks(0, 1L, "medium_term"));
     }
 }

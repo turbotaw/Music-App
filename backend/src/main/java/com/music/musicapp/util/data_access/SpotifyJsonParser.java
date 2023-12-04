@@ -59,17 +59,16 @@ public class SpotifyJsonParser {
                 Date releaseDate;
 
                 switch (releaseDateStr.length()) {
-                    case 4: // Only year is provided
+                    case 4:
                         dateFormat = new SimpleDateFormat("yyyy");
                         break;
-                    case 7: // Year and month are provided
+                    case 7:
                         dateFormat = new SimpleDateFormat("yyyy-MM");
                         break;
-                    case 10: // Full date is provided
+                    case 10: 
                         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         break;
                     default:
-                        // Handle unexpected format
                         throw new ParseException("Unexpected date format: " + releaseDateStr, 0);
                 }
 
@@ -77,8 +76,8 @@ public class SpotifyJsonParser {
 
                 JSONArray albumArtistsJson = albumJson.getJSONArray("artists");
                 List<Artist> albumArtists = parseArtists(albumArtistsJson);
-                String genre = ""; // Genre may not be directly available
-                List<Track> tracksInAlbum = new ArrayList<>(); // Tracks in album may not be directly available
+                String genre = ""; // Genre is not directly available in JSON response
+                List<Track> tracksInAlbum = new ArrayList<>(); // Tracks in album is not directly available in JSON response
                 String albumType = albumJson.getString("album_type");
                 JSONArray marketsJson = albumJson.getJSONArray("available_markets");
                 List<String> availableMarkets = parseStringArray(marketsJson);
@@ -115,11 +114,11 @@ public class SpotifyJsonParser {
             JSONObject artistJson = artistsJson.getJSONObject(j);
             String artistName = artistJson.getString("name");
             String artistId = artistJson.getString("id");
-            int popularity = 0; // Popularity may not be directly available
+            int popularity = 0; // Popularity is not directly available in JSON response
             String type = artistJson.getString("type");
             String artistUri = artistJson.getString("uri");
-            List<String> genres = new ArrayList<>(); // Genres may not be directly available
-            List<Album> albums = new ArrayList<>(); // Albums may not be directly available
+            List<String> genres = new ArrayList<>(); // Genres is not directly available in JSON response
+            List<Album> albums = new ArrayList<>(); // Albums is not directly available in JSON response
 
             SpotifyArtist artist = new SpotifyArtist(artistName, genres, albums, artistId, popularity, type, artistUri);
             artists.add(artist);

@@ -46,13 +46,14 @@ public class SpotifyDataTransformServiceTests {
     public void getTopTracks_ShouldReturnArtistNames() throws Exception {
         long userId = 1L;
         int offset = 0;
+        String timeFrame = "medium_term";
         String mockJsonResponse = "{\"data\":\"Random JSON data\"}";
         List<SpotifyTrack> mockTracks = createMockTracks();
 
-        given(spotifyUserRequestService.getTopTracks(offset, userId)).willReturn(mockJsonResponse);
+        given(spotifyUserRequestService.getTopTracks(offset, userId, timeFrame)).willReturn(mockJsonResponse);
         given(spotifyJsonParser.parseJsonToSpotifyTracks(mockJsonResponse)).willReturn(mockTracks);
 
-        List<String> trackAndArtist = spotifyDataTransformService.transformTopTracksAndArtist(offset, userId);
+        List<String> trackAndArtist = spotifyDataTransformService.transformTopTracksAndArtist(offset, userId,timeFrame);
         assertNotNull(trackAndArtist, "Returned list should not be null");
         assertEquals(2, trackAndArtist.size(), "Returned list size should match the number of tracks");
         assertEquals("Track 1 - Artist 1", trackAndArtist.get(0), "First element should match expected format");
@@ -94,14 +95,15 @@ public class SpotifyDataTransformServiceTests {
 
         int actualOffset = 0;
         Long userId = 1L;
+        String timeFrame = "medium_term";
 
         String dummyJsonResponse = "{\"data\":\"Random JSON data\"}";
-        when(spotifyUserRequestService.getTopTracks(actualOffset, userId)).thenReturn(dummyJsonResponse);
+        when(spotifyUserRequestService.getTopTracks(actualOffset, userId, timeFrame)).thenReturn(dummyJsonResponse);
 
         when(spotifyJsonParser.parseJsonToSpotifyTracks(dummyJsonResponse))
                 .thenThrow(new ParseException("Parse error", 0));
 
         assertThrows(ParseException.class,
-                () -> spotifyDataTransformService.transformTopTracksAndArtist(actualOffset, userId));
+                () -> spotifyDataTransformService.transformTopTracksAndArtist(actualOffset, userId, timeFrame));
     }
 }
