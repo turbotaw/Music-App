@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { render, act } from '@testing-library/react';
-import useSpotifyAuth from './SpotifyAuth'; 
+import useSpotifyAuth from '../util/SpotifyAuth'; 
 import { TextEncoder } from 'util';
 
 global.TextEncoder = require('util').TextEncoder;

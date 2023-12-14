@@ -6,7 +6,7 @@ import UserInput from './App';
 import { MemoryRouter } from 'react-router-dom';
 import DisplayUserId from './App';
 import { UserProvider } from './components/UserContext';
-import SpotifyComponent from './components/SpotifyComponent';
+import SpotifyComponent from './webpages/SpotifyComponent';
 import { JSX } from 'react/jsx-runtime';
 import { createMemoryHistory } from 'history';
 

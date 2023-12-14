@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SpotifyComponent from './SpotifyComponent';
-import useSpotifyAuth from '../webpages/SpotifyAuth';
+import useSpotifyAuth from '../util/SpotifyAuth';
 
 jest.mock('./SpotifyAuth', () => ({
     __esModule: true,

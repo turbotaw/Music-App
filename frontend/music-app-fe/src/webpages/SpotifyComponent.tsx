@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import useSpotifyAuth from '../webpages/SpotifyAuth';
+import useSpotifyAuth from '../util/SpotifyAuth';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from './UserContext';
+import { useUser } from '../components/UserContext';
+import "./SpotifyComponent.css";
+import spotifyLogo from '../img/spotify-logo.png';
+
 
 interface UserInputProps {
   setUserId: (userId: string) => void;
@@ -128,20 +131,20 @@ const SpotifyComponent: React.FC = () => {
   };
 
   return (
-    <div>
-      {!isAuthenticated ? (
-        <div>
-          <button onClick={handleLogin}>Login with Spotify</button>
-          <UserInput />  {/* Moved UserInput here to always show */}
-        </div>
-      ) : (
-        <div>
-          <div>Authenticated with Spotify</div>
-        </div>
-      )}
-      <DisplayUserId />  {/* DisplayUserId can be outside to always show */}
+    <div className="spotify-component">
+        {!isAuthenticated ? (
+            <div>
+                <button onClick={handleLogin}>
+                Login with <img src={spotifyLogo} alt="Spotify" className="spotify-logo" />
+                </button>
+                <UserInput />
+            </div>
+        ) : (
+            <div>Authenticated with Spotify</div>
+        )}
+        <DisplayUserId />
     </div>
-  );
+);
 };
 
 
