@@ -26,9 +26,7 @@ public class AppleMusicTokenGenerator {
         String teamId = appleMusicSecretsConfig.getTeamId();
         String privateKeyStr = appleMusicSecretsConfig.getPrivateKey();
 
-        byte[] privateKeyBytes = Base64.getDecoder().decode(privateKeyStr.replaceAll("-----END PRIVATE KEY-----", "")
-                                                                      .replaceAll("-----BEGIN PRIVATE KEY-----", "")
-                                                                      .replaceAll("\\s", ""));
+        byte[] privateKeyBytes = Base64.getDecoder().decode(privateKeyStr);
 
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance("EC");
